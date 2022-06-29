@@ -19,11 +19,9 @@ export default {
     <NavigationDrawer/>
     <v-app-bar app/>
     <v-main>
-<!--        <router-view></router-view>-->
+      <router-view/>
     </v-main>
-
     <v-footer app>
-      <!-- -->
     </v-footer>
   </v-app>
 </template>

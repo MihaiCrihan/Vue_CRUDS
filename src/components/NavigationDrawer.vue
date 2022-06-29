@@ -4,9 +4,11 @@ export default {
 
   data: () => ({
     items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-      { title: 'Photos', icon: 'mdi-image' },
-      { title: 'About', icon: 'mdi-help-box' },
+      {title: 'Home', icon: 'mdi-view-dashboard', link: '/'},
+      {title: 'Users', icon: 'mdi-account-multiple-outline', link: '/users'},
+      {title: 'Roles', icon: 'mdi-account-tie', link: '/roles'},
+      {title: 'Goods', icon: 'mdi-cart-variant', link: '/goods'},
+      {title: 'Orders', icon: 'mdi-order-bool-descending-variant', link: '/orders'},
     ],
     right: null,
   }),
@@ -29,6 +31,7 @@ export default {
     <v-divider></v-divider>
 
     <v-list
+        class="nav"
         dense
         nav
     >
@@ -41,14 +44,28 @@ export default {
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item-content class="py-0">
+          <router-link :to="item.link">
+            <v-list-item-title class="py-3">
+              {{ item.title }}
+            </v-list-item-title>
+          </router-link>
         </v-list-item-content>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.nav {
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    color: gray;
 
+    &.router-link-exact-active {
+      color: black;
+    }
+  }
+}
 </style>
