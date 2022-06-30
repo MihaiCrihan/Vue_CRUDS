@@ -13,22 +13,32 @@ const routes = [
   {
     path: '/goods',
     name: 'Goods',
-    component: () => import(/* webpackChunkName: "about" */ '../modules/Goods/index.vue')
+    component: () => import(/* webpackChunkName: "goods" */ '../modules/goods/index.vue')
   },
   {
     path: '/orders',
     name: 'Orders',
-    component: () => import(/* webpackChunkName: "about" */ '../modules/Orders/index.vue')
+    component: () => import(/* webpackChunkName: "orders" */ '../modules/orders/index.vue')
   },
   {
     path: '/roles',
     name: 'Roles',
-    component: () => import(/* webpackChunkName: "about" */ '../modules/Roles/index.vue')
+    component: () => import(/* webpackChunkName: "roles" */ '../modules/roles/index.vue')
   },
   {
     path: '/users',
     name: 'Users',
-    component: () => import(/* webpackChunkName: "about" */ '../modules/Users/index.vue')
+    component: () => import(/* webpackChunkName: "users" */ '../modules/users/index.vue')
+  },
+  {
+    path: '/roles/create',
+    name: 'Roles Create',
+    component: () => import(/* webpackChunkName: "roles create" */ '../modules/roles/components/create')
+  },
+  {
+    path: '/roles/edit/:id',
+    name: 'Roles Edit',
+    component: () => import(/* webpackChunkName: "roles edit" */ '../modules/roles/components/edit')
   }
 ]
 

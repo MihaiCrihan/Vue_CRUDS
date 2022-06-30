@@ -1,9 +1,19 @@
 {
   "roles": [
     {
+      "id": 0,
+      "name": "Admin",
+      "alias": "admin"
+    },
+    {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "Administrator",
+      "alias": "administrator"
+    },
+    {
+      "id": 2,
+      "name": "Guest",
+      "alias": "guest"
     }
   ],
   "users": [
