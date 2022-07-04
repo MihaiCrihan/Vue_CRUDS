@@ -31,6 +31,7 @@ export default {
             role: this.model.role
           });
       alert("Edited successful");
+      this.$router.push('/users');
     }
   }
 }

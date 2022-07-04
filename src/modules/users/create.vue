@@ -82,6 +82,7 @@ export default {
         :rules="[rules.required()]">
     </v-select>
     <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
+    <v-btn class="mr-8" text @click="$router.push('/users')">Cancel</v-btn>
   </div>
 </template>
 
