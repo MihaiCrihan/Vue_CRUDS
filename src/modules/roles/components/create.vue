@@ -17,14 +17,14 @@ export default {
 
   methods: {
     loadData() {
-      this.axios.get('http://localhost:3000/' + 'roles').then((response) => {
+      this.axios.get('http://localhost:3000/roles').then((response) => {
         this.items = response.data;
         this.model.id = this.items.length
       })
     },
 
     async updateData() {
-      await this.axios.post('http://localhost:3000/' + 'roles',
+      await this.axios.post('http://localhost:3000/roles',
           {
             id: this.model.id,
             name: this.model.name,

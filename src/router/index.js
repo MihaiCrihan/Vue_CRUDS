@@ -21,19 +21,29 @@ const routes = [
     component: () => import(/* webpackChunkName: "orders" */ '../modules/orders/index.vue')
   },
   {
-    path: '/roles',
-    name: 'Roles',
-    component: () => import(/* webpackChunkName: "roles" */ '../modules/roles/index.vue')
-  },
-  {
     path: '/users',
     name: 'Users',
     component: () => import(/* webpackChunkName: "users" */ '../modules/users/index.vue')
   },
   {
+    path: '/users/create',
+    name: 'Users',
+    component: () => import(/* webpackChunkName: "users create" */ '../modules/users/create.vue')
+  },
+  {
+    path: '/users/edit/:id',
+    name: 'Users',
+    component: () => import(/* webpackChunkName: "users create" */ '../modules/users/edit.vue')
+  },
+  {
+    path: '/roles',
+    name: 'Roles',
+    component: () => import(/* webpackChunkName: "roles" */ '../modules/roles/index.vue')
+  },
+  {
     path: '/roles/create',
     name: 'Roles Create',
-    component: () => import(/* webpackChunkName: "roles create" */ '../modules/roles/components/create')
+    component: () => import(/* webpackChunkName: "roles create" */ '../modules/roles/components/create.vue')
   },
   {
     path: '/roles/edit/:id',

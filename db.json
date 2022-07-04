@@ -18,9 +18,31 @@
   ],
   "users": [
     {
+      "id": 0,
+      "name": "Ion",
+      "phone": "068368364",
+      "email": "mihai@mail.ru",
+      "password": "123456789231",
+      "role": 2
+    },
+    {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "mihai",
+      "phone": "929292929",
+      "email": "mANSAjlnsjl",
+      "password": "12133",
+      "role": 1
+    },
+    {
+      "id": 2,
+      "name": "aaaa",
+      "phone": "2312312",
+      "email": "miah@mada",
+      "password": "12345",
+      "role": 2
+    },
+    {
+      "id": 3
     }
   ]
 }

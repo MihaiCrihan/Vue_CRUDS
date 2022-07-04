@@ -5,10 +5,10 @@ export default {
   data: () => ({
     items: [
       {title: 'Home', icon: 'mdi-view-dashboard', link: '/'},
-      {title: 'users', icon: 'mdi-account-multiple-outline', link: '/users'},
-      {title: 'roles', icon: 'mdi-account-tie', link: '/roles'},
-      {title: 'goods', icon: 'mdi-cart-variant', link: '/goods'},
-      {title: 'orders', icon: 'mdi-order-bool-descending-variant', link: '/orders'},
+      {title: 'Users', icon: 'mdi-account-multiple-outline', link: '/users'},
+      {title: 'Roles', icon: 'mdi-account-tie', link: '/roles'},
+      {title: 'Goods', icon: 'mdi-cart-variant', link: '/goods'},
+      {title: 'Orders', icon: 'mdi-order-bool-descending-variant', link: '/orders'},
     ],
     right: null,
     isOpen: true,
