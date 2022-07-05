@@ -1,11 +1,143 @@
 <script>
 export default {
-  name: "index"
+  name: "index",
+
+  data: () => ({
+    headers: [
+      {
+        text: 'Name',
+        align: 'start',
+        sortable: false,
+        value: 'name',
+      },
+      {
+        text: 'Price',
+        align: 'start',
+        sortable: false,
+        value: 'price',
+      },
+      {
+        text: 'Photo',
+        align: 'start',
+        sortable: false,
+        value: 'photo',
+      },
+      {
+        text: 'Description',
+        align: 'start',
+        sortable: false,
+        value: 'description',
+      },
+      {
+        text: 'Actions',
+        align: 'end',
+        sortable: false,
+        value: 'actions',
+      }
+    ],
+    items: [],
+    confirmDeletion: false,
+    selectedElement: null,
+    photo: null,
+    url: null
+  }),
+
+  mounted() {
+    this.loadData()
+  },
+
+  methods: {
+    async deleteRow() {
+      await this.axios.delete('http://localhost:3000/goods/' + this.selectedElement)
+      this.confirmDeletion = false;
+      this.loadData();
+    },
+
+    loadData() {
+      this.axios.get('http://localhost:3000/goods').then((response) => {
+        this.items = response.data;
+      })
+    },
+
+    getForEdit(item) {
+      this.$router.push(`/goods/edit/` + item.id)
+    },
+
+    openModal(id) {
+      this.confirmDeletion = true;
+      this.selectedElement = id;
+      console.log(this.selectedElement)
+    }
+  }
 }
 </script>
 
 <template>
-  <h1>This is an Goods page</h1>
+  <div class="pa-6">
+    <div class="d-flex">
+      <h1 class="mb-4">Goods</h1>
+      <v-spacer></v-spacer>
+      <v-btn @click="$router.push(`/goods/create`)">Add good</v-btn>
+    </div>
+    <v-data-table
+        :headers="headers"
+        :items="items"
+        :items-per-page="15"
+        class="elevation-1"
+    >
+      <template v-slot:item="row">
+        <tr>
+          <td>{{ row.item.name }}</td>
+          <td>{{ row.item.price }} &euro;</td>
+          <td>
+            <v-img height="50px" width="50px" :src="row.item.photo"></v-img>
+           </td>
+          <td>{{ row.item.description }}</td>
+          <td class="text-right d-flex align-center justify-end">
+            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small color="pink">
+              <v-icon dark>mdi-pencil</v-icon>
+            </v-btn>
+            <v-btn
+                @click="openModal(row.item.id)"
+                class="mx-2"
+                icon
+                x-small
+                color="pink">
+              <v-icon dark>mdi-delete</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+    <v-dialog
+        v-model="confirmDeletion"
+        persistent
+        max-width="290"
+    >
+      <v-card>
+        <v-card-title class="text-h5">
+          Are you sure you want to delete this item ?
+        </v-card-title>
+        <v-card-actions>
+          <v-btn
+              color="green darken-1"
+              text
+              @click="confirmDeletion = false"
+          >
+            Cancel
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="green darken-1"
+              text
+              @click="deleteRow"
+          >
+            Confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <style scoped>

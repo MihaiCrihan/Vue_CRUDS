@@ -16,6 +16,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "goods" */ '../modules/goods/index.vue')
   },
   {
+    path: '/goods/create',
+    name: 'Goods create',
+    component: () => import(/* webpackChunkName: "goods create" */ '../modules/goods/create.vue')
+  },
+  {
+    path: '/goods/edit/:id',
+    name: 'Goods edit',
+    component: () => import(/* webpackChunkName: "goods edit" */ '../modules/goods/edit.vue')
+  },
+  {
     path: '/orders',
     name: 'Orders',
     component: () => import(/* webpackChunkName: "orders" */ '../modules/orders/index.vue')
@@ -27,13 +37,13 @@ const routes = [
   },
   {
     path: '/users/create',
-    name: 'Users',
+    name: 'Users create',
     component: () => import(/* webpackChunkName: "users create" */ '../modules/users/create.vue')
   },
   {
     path: '/users/edit/:id',
-    name: 'Users',
-    component: () => import(/* webpackChunkName: "users create" */ '../modules/users/edit.vue')
+    name: 'Users edit',
+    component: () => import(/* webpackChunkName: "users edit" */ '../modules/users/edit.vue')
   },
   {
     path: '/roles',

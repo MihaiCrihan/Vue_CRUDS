@@ -44,5 +44,49 @@
     {
       "id": 3
     }
+  ],
+  "goods": [
+    {
+      "id": 0,
+      "name": "Macaroane",
+      "price": 230,
+      "photo": "https://picsum.photos/id/237/200/300",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad asperiores ducimus eos eum excepturi exercitationem facere."
+    },
+    {
+      "id": 1,
+      "name": "Шпроты",
+      "price": "1342",
+      "photo": "https://picsum.photos/id/123/200/300",
+      "description": "bb b jb bj jj bb ,b nbn bn bnb nbn bnm bnmb nmb "
+    },
+    {
+      "id": 2,
+      "name": "Мясо",
+      "price": "223",
+      "photo": "https://picsum.photos/id/37/200/300",
+      "description": "nnjlnjn jnjl njl njln jlnjl njl njl njln jln jlnjl njl njl njln jlnj njl nl n"
+    },
+    {
+      "id": 3,
+      "name": "Черная икра",
+      "price": "2323",
+      "photo": "https://picsum.photos/id/111/200/300",
+      "description": "asdasdasdad  j j  j  k;ej;kj ;j ;kj;ke jkj ;kj;k j;k j;kj ;kj;k j;k j;k j;j ;j; "
+    },
+    {
+      "id": 4,
+      "name": "Масло",
+      "price": "12",
+      "photo": "https://picsum.photos/id/44/200/300",
+      "description": " шо тот ото то"
+    },
+    {
+      "id": 5,
+      "name": "Хлеб",
+      "price": "3",
+      "photo": "https://picsum.photos/id/56/200/300",
+      "description": "аффаафы фыф ы ф ф ф ф "
+    }
   ]
 }
