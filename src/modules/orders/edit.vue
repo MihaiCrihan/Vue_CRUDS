@@ -4,7 +4,9 @@ export default {
 
   data: () => ({
     model: {},
-    roles: []
+    roles: [],
+    goods: [],
+    prices: []
   }),
 
   mounted() {
@@ -13,22 +15,34 @@ export default {
 
   methods: {
     loadData() {
-      this.axios.get(`http://localhost:3000/goods/${this.$route.params.id}`).then((response) => {
+      this.axios.get(`http://localhost:3000/orders/${this.$route.params.id}`).then((response) => {
         this.model = response.data;
+      })
+      this.axios.get('http://localhost:3000/goods').then((response) => {
+        this.goods = response.data;
       })
     },
 
-    submit() {
-      this.axios.patch(`http://localhost:3000/goods/${this.$route.params.id}`,
+    async submit() {
+      await this.axios.patch(`http://localhost:3000/orders/${this.$route.params.id}`,
           {
-            name: this.model.name,
-            price: this.model.price,
-            photo: this.model.photo,
-            description: this.model.description,
+            id: this.model.id,
+            orderedGoods: this.model.orderedGoods,
+            totalSum: this.model.totalSum,
           });
-      alert("Edited successful");
-      this.$router.push('/goods');
-    }
+      alert("Added successful");
+      await this.loadData();
+      this.model.totalSum = null;
+      this.model.orderedGoods = null;
+    },
+
+    calcSum() {
+      this.prices.splice(0, this.prices.length);
+      for (const items in this.model.orderedGoods) {
+        this.prices.push(this.goods.find(x => x.id === this.model.orderedGoods[items]).price)
+      }
+      this.model.totalSum = this.prices.reduce((prev, next) => prev + next)
+    },
   }
 }
 
@@ -36,30 +50,20 @@ export default {
 
 <template>
   <div class="d-flex align-center pt-8">
-    <v-text-field
-        v-model="model.name"
-        class="mx-8"
-        label="Name"
-        hide-details="auto"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.price"
-        class="mx-8"
-        label="Phone"
-        hide-details="auto"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.photo"
-        class="mx-8"
-        label="Email"
-        hide-details="auto"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.description"
-        class="mx-8"
-        label="Password"
-        hide-details="auto"
-    ></v-text-field>
+    <v-select
+        v-model="model.orderedGoods"
+        :items="goods"
+        :menu-props="{ maxHeight: '400' }"
+        label="Select goods"
+        multiple
+        class="mr-6"
+        item-value="id"
+        item-text="name"
+        hint="Pick goods"
+        persistent-hint
+        @change="calcSum()"
+    ></v-select>
+    {{model.totalSum}}
     <v-btn class="mx-8 success" @click="submit">Save</v-btn>
   </div>
 </template>

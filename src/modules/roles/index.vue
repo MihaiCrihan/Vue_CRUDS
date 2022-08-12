@@ -34,7 +34,7 @@ export default {
 
   methods: {
     async deleteRow() {
-      await this.axios.delete('http://localhost:3000/roles/' + this.selectedElement)
+      await this.axios.delete(`http://localhost:3000/roles/${this.selectedElement}`)
       this.confirmDeletion = false;
       this.loadData();
     },
@@ -46,7 +46,7 @@ export default {
     },
 
     getForEdit(item) {
-      this.$router.push(`/roles/edit/` + item.id)
+      this.$router.push(`/roles/edit/${item.id}`)
     },
 
     openModal(id) {

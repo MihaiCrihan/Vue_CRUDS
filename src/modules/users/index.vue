@@ -1,4 +1,6 @@
 <script>
+import axios from "axios";
+
 export default {
   name: "index",
 
@@ -51,17 +53,19 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get('http://localhost:3000/users').then((response) => {
-        this.model = response.data;
-      })
-      this.axios.get('http://localhost:3000/roles').then((response) => {
-        this.roles = response.data;
-      })
+    async loadData() {
+     try {
+       const response = await axios.get('http://localhost:3000/users');
+       this.model = response.data;
+       const roles = await axios.get('http://localhost:3000/roles');
+       this.roles = roles.data;
+     } catch (e) {
+       console.log(e)
+     }
     },
 
     getForEdit(item) {
-      this.$router.push(`/users/edit/` + item.id)
+      this.$router.push(`/users/edit/${item.id}`)
     },
 
     showRole(currentId) {
@@ -69,7 +73,7 @@ export default {
     },
 
     async deleteRow(item) {
-      await this.axios.delete('http://localhost:3000/users/' + item.id).then(() => {
+      await this.axios.delete(`http://localhost:3000/users/${item.id}`).then(() => {
         this.confirmDeletion = false;
         this.loadData();
       }).catch(error => {
