@@ -101,7 +101,7 @@ export default {
           <td>{{ row.item.password }}</td>
           <td>{{ showRole(row.item.role) }}</td>
           <td class="text-right">
-            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small color="pink">
+            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
             <v-dialog

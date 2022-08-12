@@ -92,15 +92,15 @@ export default {
           <td>{{ row.item.id }}</td>
           <td>
             <div v-for="(id, index) in row.item.orderedGoods" :key="index" class="d-flex align-center mb-2">
-              <img width="50" height="50" :src="getData(id).photo" alt="photo">
-              <span class="mx-3">{{getData(id).name}}</span>
+              <img v-if="getData(id)" width="50" height="50" :src="getData(id).photo" alt="photo">
+              <span v-if="getData(id)" class="mx-3">{{getData(id).name}}</span>
               <v-spacer></v-spacer>
-              <strong>{{getData(id).price}} &euro;</strong>
+              <strong v-if="getData(id)">{{getData(id).price}} &euro;</strong>
             </div>
           </td>
           <td><strong>{{ row.item.totalSum }} &euro;</strong></td>
           <td class="text-right">
-            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small color="pink">
+            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
             <v-btn

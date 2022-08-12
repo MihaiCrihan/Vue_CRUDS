@@ -28,17 +28,12 @@ export default {
       })
     },
 
-    getSelectedData() {
-      for (const idKey in this.model.orderedGoods) {
-        this.prices.push(this.goods.find(x => x.id === this.model.orderedGoods[idKey]).price)
-        // console.log(this.goods.find(x => x.id === this.model.orderedGoods[idKey]).price);
+    calcSum() {
+      this.prices.splice(0, this.prices.length);
+      for (const items in this.model.orderedGoods) {
+        this.prices.push(this.goods.find(x => x.id === this.model.orderedGoods[items]).price)
       }
-      this.prices.reduce(
-          (previousValue, currentValue) => previousValue + currentValue,
-          this.model.totalSum
-      );
-      console.log(this.model.totalSum)
-
+        this.model.totalSum = this.prices.reduce((prev, next) => prev + next)
     },
 
     async updateData() {
@@ -70,10 +65,9 @@ export default {
         item-text="name"
         hint="Pick goods"
         persistent-hint
-        @change="getSelectedData()"
+        @change="calcSum()"
     ></v-select>
-<!--    {{ model.totalSum }}-->
-    {{this.model.orderedGoods}}
+    {{model.totalSum}}
     <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
     <v-btn class="mr-8" text @click="$router.push('/orders')">Cancel</v-btn>
   </div>

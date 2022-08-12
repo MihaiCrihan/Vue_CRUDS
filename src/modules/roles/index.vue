@@ -76,7 +76,7 @@ export default {
           <td>{{ row.item.name }}</td>
           <td>{{ row.item.alias }}</td>
           <td class="text-right">
-            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small color="pink">
+            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
             <v-btn

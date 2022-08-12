@@ -94,7 +94,7 @@ export default {
            </td>
           <td>{{ row.item.description }}</td>
           <td class="text-right d-flex align-center justify-end">
-            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small color="pink">
+            <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
             <v-btn

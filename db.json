@@ -106,10 +106,19 @@
     {
       "id": 2,
       "orderedGoods": [
-        1,
-        2
+        0,
+        2,
+        4
       ],
-      "totalSum": 0
+      "totalSum": 465
+    },
+    {
+      "id": 3,
+      "orderedGoods": [
+        1,
+        3
+      ],
+      "totalSum": 3665
     }
   ]
 }
