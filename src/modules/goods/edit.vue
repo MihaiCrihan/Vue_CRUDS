@@ -12,22 +12,23 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get(`http://localhost:3000/goods/${this.$route.params.id}`).then((response) => {
+    async loadData() {
+      try {
+        const response = await this.axios.get(`http://localhost:3000/goods/${this.$route.params.id}`)
         this.model = response.data;
-      })
+      } catch (e) {
+        console.log(e)
+      }
     },
 
-    submit() {
-      this.axios.patch(`http://localhost:3000/goods/${this.$route.params.id}`,
-          {
-            name: this.model.name,
-            price: this.model.price,
-            photo: this.model.photo,
-            description: this.model.description,
-          });
-      alert("Edited successful");
-      this.$router.push('/goods');
+    async submit() {
+      try {
+        await this.axios.patch(`http://localhost:3000/goods/${this.$route.params.id}`,this.model);
+        alert("Edited successful");
+        await this.$router.push('/goods');
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

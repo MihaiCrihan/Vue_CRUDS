@@ -1,4 +1,5 @@
 <script>
+
 export default {
   name: "edit.vue",
 
@@ -12,26 +13,27 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get(`http://localhost:3000/users/${this.$route.params.id}`).then((response) => {
-        this.model = response.data;
-      })
-      this.axios.get('http://localhost:3000/roles').then((response) => {
-        this.roles = response.data;
-      })
+    async loadData() {
+      try {
+        const [response, roles] = await Promise.all([
+          this.axios.get(`http://localhost:3000/users/${this.$route.params.id}`),
+          this.axios.get('http://localhost:3000/roles')
+        ]);
+        this.model = response.data
+        this.roles = roles.data
+      } catch (e) {
+        console.log(e)
+      }
     },
 
-    submit() {
-      this.axios.patch(`http://localhost:3000/users/${this.$route.params.id}`,
-          {
-            name: this.model.name,
-            phone: this.model.phone,
-            email: this.model.email,
-            password: this.model.password,
-            role: this.model.role
-          });
-      alert("Edited successful");
-      this.$router.push('/users');
+    async submit() {
+      try {
+        await this.axios.patch(`http://localhost:3000/users/${this.$route.params.id}`, this.model);
+        alert("Edited successful");
+        await this.$router.push('/users');
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

@@ -38,7 +38,7 @@
       "name": "aaaa",
       "phone": "2312312",
       "email": "miah@mada",
-      "password": "12345",
+      "password": "123321",
       "role": 2
     }
   ],
@@ -84,6 +84,35 @@
       "price": 3,
       "photo": "https://picsum.photos/id/56/200/300",
       "description": "аффаафы фыф ы ф ф ф ф "
+    },
+    {
+      "id": 6,
+      "name": "RACI",
+      "price": "232",
+      "photo": "https://picsum.photos/200/300?random=1",
+      "description": "tasty"
+    },
+    {
+      "id": 7,
+      "name": "ss",
+      "price": "55",
+      "photo": "https://picsum.photos/200/300?random=1",
+      "description": "wdasas"
+    },
+    {
+      "id": 8,
+      "name": "222",
+      "price": "2",
+      "photo": "https://picsum.photos/200/300?random=2",
+      "description": "1111111111"
+    },
+    {
+      "id": 9,
+      "price": "23"
+    },
+    {
+      "id": 10,
+      "price": 33
     }
   ],
   "orders": [
@@ -107,18 +136,26 @@
       "id": 2,
       "orderedGoods": [
         2,
-        4
+        4,
+        5
       ],
-      "totalSum": 235
+      "totalSum": 238
     },
     {
       "id": 3,
       "orderedGoods": [
         1,
-        3,
-        0
+        4,
+        5
       ],
-      "totalSum": 3895
+      "totalSum": 1357
+    },
+    {
+      "id": 4,
+      "orderedGoods": [
+        4
+      ],
+      "totalSum": 12
     }
   ]
 }

@@ -44,18 +44,26 @@ export default {
 
   methods: {
     async deleteRow() {
-      await this.axios.delete(`http://localhost:3000/orders/${this.selectedElement}`)
-      this.confirmDeletion = false;
-      this.loadData();
+      try {
+        await this.axios.delete(`http://localhost:3000/orders/${this.selectedElement}`)
+        this.confirmDeletion = false;
+        await this.loadData();
+      } catch (e) {
+        console.log(e)
+      }
     },
 
-    loadData() {
-      this.axios.get('http://localhost:3000/orders').then((response) => {
-        this.items = response.data;
-      })
-        this.axios.get('http://localhost:3000/goods').then((response) => {
-          this.goods = response.data;
-        })
+    async loadData() {
+      try {
+        const [items, goods] = await Promise.all([
+          this.axios.get('http://localhost:3000/orders'),
+          this.axios.get('http://localhost:3000/goods')
+        ]);
+        this.items = items.data
+        this.goods = goods.data
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     getForEdit(item) {
@@ -93,9 +101,9 @@ export default {
           <td>
             <div v-for="(id, index) in row.item.orderedGoods" :key="index" class="d-flex align-center mb-2">
               <img v-if="getData(id)" width="50" height="50" :src="getData(id).photo" alt="photo">
-              <span v-if="getData(id)" class="mx-3">{{getData(id).name}}</span>
+              <span v-if="getData(id)" class="mx-3">{{ getData(id).name }}</span>
               <v-spacer></v-spacer>
-              <strong v-if="getData(id)">{{getData(id).price}} &euro;</strong>
+              <strong v-if="getData(id)">{{ getData(id).price }} &euro;</strong>
             </div>
           </td>
           <td><strong>{{ row.item.totalSum }} &euro;</strong></td>

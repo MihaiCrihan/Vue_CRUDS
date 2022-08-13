@@ -63,12 +63,12 @@ const routes = [
   {
     path: '/roles/create',
     name: 'Roles Create',
-    component: () => import(/* webpackChunkName: "roles create" */ '../modules/roles/components/create.vue')
+    component: () => import(/* webpackChunkName: "roles create" */ '../modules/roles/create.vue')
   },
   {
     path: '/roles/edit/:id',
     name: 'Roles Edit',
-    component: () => import(/* webpackChunkName: "roles edit" */ '../modules/roles/components/edit')
+    component: () => import(/* webpackChunkName: "roles edit" */ '../modules/roles/edit')
   }
 ]
 

@@ -34,15 +34,22 @@ export default {
 
   methods: {
     async deleteRow() {
-      await this.axios.delete(`http://localhost:3000/roles/${this.selectedElement}`)
-      this.confirmDeletion = false;
-      this.loadData();
+      try {
+        await this.axios.delete(`http://localhost:3000/roles/${this.selectedElement}`)
+        this.confirmDeletion = false;
+        await this.loadData();
+      } catch (e) {
+        console.log(e)
+      }
     },
 
-    loadData() {
-      this.axios.get('http://localhost:3000/roles').then((response) => {
-        this.items = response.data;
-      })
+    async loadData() {
+      try {
+        const response = await this.axios.get('http://localhost:3000/roles')
+        this.items = response.data
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     getForEdit(item) {
@@ -52,7 +59,6 @@ export default {
     openModal(id) {
       this.confirmDeletion = true;
       this.selectedElement = id;
-      console.log(this.selectedElement)
     }
   }
 }

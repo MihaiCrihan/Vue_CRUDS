@@ -16,24 +16,30 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get('http://localhost:3000/roles').then((response) => {
+    async loadData() {
+      try {
+        const response = await this.axios.get('http://localhost:3000/roles')
         this.items = response.data;
         this.model.id = this.items.length
-      })
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     async updateData() {
-      await this.axios.post('http://localhost:3000/roles',
-          {
-            id: this.model.id,
-            name: this.model.name,
-            alias: this.model.alias
-          });
-      console.log("Added successful");
-      await this.loadData();
-          this.model.alias = null;
-          this.model.name = null;
+      try {
+        await this.axios.post('http://localhost:3000/roles',
+            {
+              id: this.model.id,
+              name: this.model.name,
+              alias: this.model.alias
+            });
+        console.log("Added successful");
+        await this.loadData();
+        this.model = {};
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

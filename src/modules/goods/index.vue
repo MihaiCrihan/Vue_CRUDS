@@ -48,15 +48,22 @@ export default {
 
   methods: {
     async deleteRow() {
-      await this.axios.delete(`http://localhost:3000/goods/${this.selectedElement}`)
-      this.confirmDeletion = false;
-      this.loadData();
+      try {
+        await this.axios.delete(`http://localhost:3000/goods/${this.selectedElement}`)
+        this.confirmDeletion = false;
+        await this.loadData();
+      } catch (e) {
+        console.log(e)
+      }
     },
 
-    loadData() {
-      this.axios.get('http://localhost:3000/goods').then((response) => {
+    async loadData() {
+      try {
+        const response = await this.axios.get('http://localhost:3000/goods')
         this.items = response.data;
-      })
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     getForEdit(item) {
@@ -66,7 +73,6 @@ export default {
     openModal(id) {
       this.confirmDeletion = true;
       this.selectedElement = id;
-      console.log(this.selectedElement)
     }
   }
 }
@@ -91,7 +97,7 @@ export default {
           <td>{{ row.item.price }} &euro;</td>
           <td>
             <v-img height="50px" width="50px" :src="row.item.photo"></v-img>
-           </td>
+          </td>
           <td>{{ row.item.description }}</td>
           <td class="text-right d-flex align-center justify-end">
             <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>

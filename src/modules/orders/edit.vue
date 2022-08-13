@@ -14,26 +14,33 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get(`http://localhost:3000/orders/${this.$route.params.id}`).then((response) => {
+    async loadData() {
+      try {
+        const [response, goods] = await Promise.all([
+          this.axios.get(`http://localhost:3000/orders/${this.$route.params.id}`),
+          this.axios.get('http://localhost:3000/goods')
+        ])
         this.model = response.data;
-      })
-      this.axios.get('http://localhost:3000/goods').then((response) => {
-        this.goods = response.data;
-      })
+        this.goods = goods.data;
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     async submit() {
-      await this.axios.patch(`http://localhost:3000/orders/${this.$route.params.id}`,
-          {
-            id: this.model.id,
-            orderedGoods: this.model.orderedGoods,
-            totalSum: this.model.totalSum,
-          });
-      alert("Added successful");
-      await this.loadData();
-      this.model.totalSum = null;
-      this.model.orderedGoods = null;
+      try {
+        await this.axios.patch(`http://localhost:3000/orders/${this.$route.params.id}`,
+            {
+              id: this.model.id,
+              orderedGoods: this.model.orderedGoods,
+              totalSum: this.model.totalSum,
+            });
+        alert("Added successful");
+        await this.loadData();
+        this.model = {};
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     calcSum() {

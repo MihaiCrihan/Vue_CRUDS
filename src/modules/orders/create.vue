@@ -18,14 +18,18 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get('http://localhost:3000/orders').then((response) => {
+    async loadData() {
+      try {
+        const [response, goods] = await Promise.all([
+          this.axios.get('http://localhost:3000/orders'),
+          this.axios.get('http://localhost:3000/goods')
+        ])
         this.items = response.data;
         this.model.id = this.items.length
-      })
-      this.axios.get('http://localhost:3000/goods').then((response) => {
-        this.goods = response.data;
-      })
+        this.goods = goods.data
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     calcSum() {
@@ -33,20 +37,18 @@ export default {
       for (const items in this.model.orderedGoods) {
         this.prices.push(this.goods.find(x => x.id === this.model.orderedGoods[items]).price)
       }
-        this.model.totalSum = this.prices.reduce((prev, next) => prev + next)
+      this.model.totalSum = this.prices.reduce((prev, next) => prev + next)
     },
 
     async updateData() {
-      await this.axios.post('http://localhost:3000/orders',
-          {
-            id: this.model.id,
-            orderedGoods: this.model.orderedGoods,
-            totalSum: this.model.totalSum,
-          });
-      alert("Added successful");
-      await this.loadData();
-      this.model.totalSum = null;
-      this.model.orderedGoods = null;
+      try {
+        await this.axios.post('http://localhost:3000/orders', this.model);
+        alert("Added successful");
+        await this.loadData();
+        this.model = {};
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
@@ -67,7 +69,7 @@ export default {
         persistent-hint
         @change="calcSum()"
     ></v-select>
-    {{model.totalSum}}
+    {{ model.totalSum }}
     <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
     <v-btn class="mr-8" text @click="$router.push('/orders')">Cancel</v-btn>
   </div>

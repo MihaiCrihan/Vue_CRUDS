@@ -7,6 +7,7 @@ export default {
   data: () => ({
     model: [],
     confirmDeletion: false,
+    selectedElement: null,
     roles: [],
     headers: [
       {
@@ -54,14 +55,16 @@ export default {
 
   methods: {
     async loadData() {
-     try {
-       const response = await axios.get('http://localhost:3000/users');
-       this.model = response.data;
-       const roles = await axios.get('http://localhost:3000/roles');
-       this.roles = roles.data;
-     } catch (e) {
-       console.log(e)
-     }
+      try {
+        const [response, roles] = await Promise.all([
+          axios.get('http://localhost:3000/users'),
+          axios.get('http://localhost:3000/roles')
+        ]);
+        this.model = response.data
+        this.roles = roles.data
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     getForEdit(item) {
@@ -69,16 +72,22 @@ export default {
     },
 
     showRole(currentId) {
-      return this.roles.find(({ id }) => id === currentId)?.name
+      return this.roles.find(({id}) => id === currentId)?.name
     },
 
-    async deleteRow(item) {
-      await this.axios.delete(`http://localhost:3000/users/${item.id}`).then(() => {
+    async deleteRow() {
+      try {
+        await this.axios.delete(`http://localhost:3000/users/${this.selectedElement}`);
         this.confirmDeletion = false;
-        this.loadData();
-      }).catch(error => {
-        console.log(error);
-      });
+        await this.loadData();
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    openModal(id) {
+      this.confirmDeletion = true;
+      this.selectedElement = id;
     },
   }
 }
@@ -108,49 +117,85 @@ export default {
             <v-btn @click="getForEdit(row.item)" class="mx-2" icon x-small>
               <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
-            <v-dialog
-                v-model="confirmDeletion"
-                persistent
-                max-width="290"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    class="mx-2"
-                    icon
-                    x-small
-                    color="pink">
-                  <v-icon dark>mdi-delete</v-icon>
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title class="text-h5">
-                  Are you sure you want to delete this item ?
-                </v-card-title>
-                <v-card-actions>
-                  <v-btn
-                      color="green darken-1"
-                      text
-                      @click="confirmDeletion = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                      color="green darken-1"
-                      text
-                      @click="deleteRow(row.item)"
-                  >
-                    Confirm
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+<!--            <v-dialog-->
+<!--                v-model="confirmDeletion"-->
+<!--                persistent-->
+<!--                max-width="290"-->
+<!--            >-->
+<!--              <template v-slot:activator="{ on, attrs }">-->
+<!--                <v-btn-->
+<!--                    v-bind="attrs"-->
+<!--                    v-on="on"-->
+<!--                    class="mx-2"-->
+<!--                    icon-->
+<!--                    x-small-->
+<!--                    color="pink">-->
+<!--                  <v-icon dark>mdi-delete</v-icon>-->
+<!--                </v-btn>-->
+<!--              </template>-->
+<!--              <v-card>-->
+<!--                <v-card-title class="text-h5">-->
+<!--                  Are you sure you want to delete this item ?-->
+<!--                </v-card-title>-->
+<!--                <v-card-actions>-->
+<!--                  <v-btn-->
+<!--                      color="green darken-1"-->
+<!--                      text-->
+<!--                      @click="confirmDeletion = false"-->
+<!--                  >-->
+<!--                    Cancel-->
+<!--                  </v-btn>-->
+<!--                  <v-spacer></v-spacer>-->
+<!--                  <v-btn-->
+<!--                      color="green darken-1"-->
+<!--                      text-->
+<!--                      @click="deleteRow(row.item)"-->
+<!--                  >-->
+<!--                    Confirm-->
+<!--                  </v-btn>-->
+<!--                </v-card-actions>-->
+<!--              </v-card>-->
+<!--            </v-dialog>-->
+            <v-btn
+                @click="openModal(row.item.id)"
+                class="mx-2"
+                icon
+                x-small
+                color="pink">
+              <v-icon dark>mdi-delete</v-icon>
+            </v-btn>
           </td>
         </tr>
       </template>
     </v-data-table>
+    <v-dialog
+        v-model="confirmDeletion"
+        persistent
+        max-width="290"
+    >
+      <v-card>
+        <v-card-title class="text-h5">
+          Are you sure you want to delete this item ?
+        </v-card-title>
+        <v-card-actions>
+          <v-btn
+              color="green darken-1"
+              text
+              @click="confirmDeletion = false"
+          >
+            Cancel
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="green darken-1"
+              text
+              @click="deleteRow"
+          >
+            Confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 

@@ -13,28 +13,33 @@ export default {
   },
 
   methods: {
-    loadData() {
-      this.axios.get('http://localhost:3000/goods').then((response) => {
+    async loadData() {
+      try {
+        const response = await this.axios.get('http://localhost:3000/goods');
         this.items = response.data;
-        this.model.id = this.items.length
-      })
+        this.model.id = this.items.length;
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     async updateData() {
-      await this.axios.post('http://localhost:3000/goods',
-          {
-            id: this.model.id,
-            name: this.model.name,
-            price: this.model.price,
-            photo: this.model.photo,
-            description: this.model.description,
-          });
-      alert("Added successful");
-      await this.loadData();
-      this.model.name = null;
-      this.model.price = null;
-      this.model.photo = null;
-      this.model.description = null;
+      try {
+        await this.axios.post('http://localhost:3000/goods',
+            {
+              id: this.model.id,
+              name: this.model.name,
+              price: Number(this.model.price),
+              //todo how to send number?
+              photo: this.model.photo,
+              description: this.model.description,
+            })
+        alert("Added successful");
+        await this.loadData();
+        this.model = {}
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
