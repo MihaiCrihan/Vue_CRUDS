@@ -77,6 +77,10 @@ export default {
 
     getData(id) {
       return this.goods.find(x => x.id === id)
+    },
+
+    create () {
+      this.$router.push(`/orders/create`)
     }
   }
 }
@@ -87,7 +91,7 @@ export default {
     <div class="d-flex">
       <h1 class="mb-4">Orders</h1>
       <v-spacer></v-spacer>
-      <v-btn @click="$router.push(`/orders/create`)">Add order</v-btn>
+      <v-btn @click="create">Add order</v-btn>
     </div>
     <v-data-table
         :headers="headers"

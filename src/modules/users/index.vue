@@ -89,6 +89,10 @@ export default {
       this.confirmDeletion = true;
       this.selectedElement = id;
     },
+
+    create () {
+      this.$router.push(`/users/create`)
+    }
   }
 }
 </script>
@@ -98,7 +102,7 @@ export default {
     <div class="d-flex">
       <h1 class="mb-4">Users</h1>
       <v-spacer></v-spacer>
-      <v-btn @click="$router.push(`/users/create`)">Add user</v-btn>
+      <v-btn @click="create">Add user</v-btn>
     </div>
     <v-data-table
         :headers="headers"

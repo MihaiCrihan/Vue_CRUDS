@@ -1,4 +1,5 @@
 <script>
+import rules from "@/services/rules";
 
 export default {
   name: "create",
@@ -6,6 +7,7 @@ export default {
   data: () => ({
     model: {},
     items: [],
+    rules
   }),
 
   mounted() {
@@ -23,53 +25,57 @@ export default {
       }
     },
 
-    async updateData() {
+    async createData() {
       try {
-        await this.axios.post('http://localhost:3000/goods',
-            {
-              id: this.model.id,
-              name: this.model.name,
-              price: Number(this.model.price),
-              //todo how to send number?
-              photo: this.model.photo,
-              description: this.model.description,
-            })
-        alert("Added successful");
-        await this.loadData();
-        this.model = {}
+        if ((this.$refs.form).validate()) {
+          await this.axios.post('http://localhost:3000/goods', this.model)
+          alert("Added successful");
+          await this.loadData();
+          this.model = {}
+        }
       } catch (e) {
         console.log(e)
       }
+    },
+
+    back() {
+      this.$router.push('/goods')
     }
   }
 }
 </script>
 
 <template>
-  <div class="d-flex align-center pt-8">
-    <v-text-field
-        v-model="model.name"
-        class="mx-8"
-        label="Name"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.price"
-        class="mx-8"
-        label="Price"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.photo"
-        class="mx-8"
-        label="Photo"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.description"
-        class="mx-8"
-        label="Description"
-    ></v-text-field>
-    <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
-    <v-btn class="mr-8" text @click="$router.push('/goods')">Cancel</v-btn>
-  </div>
+  <v-form ref="form" lazy-validation>
+    <div class="d-flex align-center pt-8">
+      <v-text-field
+          v-model="model.name"
+          class="mx-8"
+          label="Name"
+          :rules="[rules.required(), rules.name()]"
+      ></v-text-field>
+      <v-text-field
+          v-model.number="model.price"
+          class="mx-8"
+          label="Price"
+          :rules="[rules.required()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.photo"
+          class="mx-8"
+          label="Photo"
+          :rules="[rules.required()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.description"
+          class="mx-8"
+          label="Description"
+          :rules="[rules.required()]"
+      ></v-text-field>
+      <v-btn class="mx-8 success" @click="createData">Save</v-btn>
+      <v-btn class="mr-8" text @click="back">Cancel</v-btn>
+    </div>
+  </v-form>
 </template>
 
 <style scoped>

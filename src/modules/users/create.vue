@@ -1,6 +1,5 @@
 <script>
-import rules from "@/plugins/rules.js"
-import axios from "axios";
+import rules from "@/services/rules.js"
 
 export default {
   name: "create",
@@ -20,8 +19,8 @@ export default {
     async loadData() {
       try {
         const [response, roles] = await Promise.all([
-          axios.get('http://localhost:3000/users'),
-          axios.get('http://localhost:3000/roles')
+          this.axios.get('http://localhost:3000/users'),
+          this.axios.get('http://localhost:3000/roles')
         ]);
         this.model = response.data
         this.model.id = this.items.length
@@ -31,59 +30,64 @@ export default {
       }
     },
 
-    async updateData() {
+    async createData() {
       try {
-        await this.axios.post('http://localhost:3000/users',
-            {
-              id: this.model,
-              name: this.model.name,
-              phone: this.model.phone,
-              email: this.model.email,
-              password: this.model.password,
-              role: this.model.role
-            });
-        alert("Added successful");
-        await this.loadData();
-        this.model = {}
+        if ((this.$refs.form).validate()) {
+          await this.axios.post('http://localhost:3000/users', this.model);
+          alert("Added successful");
+          await this.loadData();
+        }
+
       } catch (e) {
         console.log(e)
       }
+    },
+
+    back() {
+      this.$router.push('/users')
     }
   }
 }
 </script>
 
 <template>
-  <div class="d-flex align-center pt-8">
-    <v-text-field
-        v-model="model.name"
-        class="mx-8"
-        label="Name"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.phone"
-        class="mx-8"
-        label="Phone"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.email"
-        class="mx-8"
-        label="Email"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.password"
-        class="mx-8"
-        label="Password"
-    ></v-text-field>
-    <v-select
-        v-model="model.role"
-        :items="roles"
-        item-value="id"
-        item-text="name">
-    </v-select>
-    <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
-    <v-btn class="mr-8" text @click="$router.push('/users')">Cancel</v-btn>
-  </div>
+  <v-form ref="form" lazy-validation>
+    <div class="d-flex align-center pt-8">
+      <v-text-field
+          v-model="model.name"
+          class="mx-8"
+          label="Name"
+          :rules="[rules.required(), rules.name()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.phone"
+          class="mx-8"
+          label="Phone"
+          :rules="[rules.required(), rules.phone()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.email"
+          class="mx-8"
+          label="Email"
+          :rules="[rules.email(), rules.required()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.password"
+          class="mx-8"
+          label="Password"
+          :rules="[rules.required(), rules.min(6)]"
+      ></v-text-field>
+      <v-select
+          v-model="model.role"
+          :items="roles"
+          item-value="id"
+          item-text="name"
+          :rules="[rules.required()]"
+      ></v-select>
+      <v-btn class="mx-8 success" @click="createData">Save</v-btn>
+      <v-btn class="mr-8" text @click="back">Cancel</v-btn>
+    </div>
+  </v-form>
 </template>
 
 <style scoped>

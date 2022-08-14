@@ -20,23 +20,22 @@ export default {
       try {
         const response = await this.axios.get(`http://localhost:3000/roles/${this.$route.params.id}`)
         this.model = response.data;
-
       } catch (e) {
         console.log(e)
       }
     },
 
-    submit() {
+    async submit() {
       try {
-        this.axios.patch(`http://localhost:3000/roles/${this.$route.params.id}`,
-            {
-              name: this.model.name,
-              alias: this.model.alias
-            });
+        await this.axios.patch(`http://localhost:3000/roles/${this.$route.params.id}`, this.model);
         alert("Edited successful");
       } catch (e) {
         console.log(e)
       }
+    },
+
+    back () {
+      this.$router.push('/roles')
     }
   }
 }
@@ -47,7 +46,7 @@ export default {
     <div class="d-flex mx-8 mt-4">
       <h1>Edit role</h1>
       <v-spacer></v-spacer>
-      <v-btn text @click="$router.push('/roles')">
+      <v-btn text @click="back">
         <v-icon>mdi-close</v-icon>
         <span>Cancel</span>
       </v-btn>

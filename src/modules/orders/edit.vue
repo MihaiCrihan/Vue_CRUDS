@@ -3,7 +3,9 @@ export default {
   name: "edit.vue",
 
   data: () => ({
-    model: {},
+    model: {
+      orderedGoods: []
+    },
     roles: [],
     goods: [],
     prices: []
@@ -29,15 +31,9 @@ export default {
 
     async submit() {
       try {
-        await this.axios.patch(`http://localhost:3000/orders/${this.$route.params.id}`,
-            {
-              id: this.model.id,
-              orderedGoods: this.model.orderedGoods,
-              totalSum: this.model.totalSum,
-            });
+        await this.axios.patch(`http://localhost:3000/orders/${this.$route.params.id}`, this.model);
         alert("Added successful");
         await this.loadData();
-        this.model = {};
       } catch (e) {
         console.log(e)
       }

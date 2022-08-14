@@ -28,12 +28,7 @@ export default {
 
     async updateData() {
       try {
-        await this.axios.post('http://localhost:3000/roles',
-            {
-              id: this.model.id,
-              name: this.model.name,
-              alias: this.model.alias
-            });
+        await this.axios.post('http://localhost:3000/roles', this.model);
         console.log("Added successful");
         await this.loadData();
         this.model = {};

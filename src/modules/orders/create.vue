@@ -49,6 +49,10 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+
+    back () {
+      this.$router.push('/orders')
     }
   }
 }
@@ -71,7 +75,7 @@ export default {
     ></v-select>
     {{ model.totalSum }}
     <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
-    <v-btn class="mr-8" text @click="$router.push('/orders')">Cancel</v-btn>
+    <v-btn class="mr-8" text @click="back">Cancel</v-btn>
   </div>
 </template>
 

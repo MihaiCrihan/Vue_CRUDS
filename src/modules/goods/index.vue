@@ -73,6 +73,10 @@ export default {
     openModal(id) {
       this.confirmDeletion = true;
       this.selectedElement = id;
+    },
+
+    create () {
+      this.$router.push(`/goods/create`)
     }
   }
 }
@@ -83,7 +87,7 @@ export default {
     <div class="d-flex">
       <h1 class="mb-4">Goods</h1>
       <v-spacer></v-spacer>
-      <v-btn @click="$router.push(`/goods/create`)">Add good</v-btn>
+      <v-btn @click="create">Add good</v-btn>
     </div>
     <v-data-table
         :headers="headers"
