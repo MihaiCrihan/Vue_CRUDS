@@ -24,10 +24,15 @@ export const phone = function () {
     }
 };
 
+export const select = function () {
+    return (v) => (v.length > 0 || "The field is required")
+};
+
 export default {
     required: requiredRule,
     min: min,
     name: nameRule,
     email: email,
     phone: phone,
+    select: select,
 }

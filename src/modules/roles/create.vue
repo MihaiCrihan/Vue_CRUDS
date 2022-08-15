@@ -1,62 +1,56 @@
 <script>
+import rules from "@/services/rules";
+
 export default {
   name: "create",
 
   data: () => ({
-    model: {
-      id: null,
-      name: null,
-      alias: null
-    },
-    items: []
+    model: {},
+    items: [],
+    rules
   }),
 
-  mounted() {
-    this.loadData()
-  },
-
   methods: {
-    async loadData() {
+    async updateData() {
       try {
-        const response = await this.axios.get('http://localhost:3000/roles')
-        this.items = response.data;
-        this.model.id = this.items.length
+        if ((this.$refs.form).validate()) {
+          await this.axios.post('http://localhost:3000/roles', this.model);
+          console.log("Added successful");
+          this.model = {};
+        }
       } catch (e) {
         console.log(e)
       }
     },
 
-    async updateData() {
-      try {
-        await this.axios.post('http://localhost:3000/roles', this.model);
-        console.log("Added successful");
-        await this.loadData();
-        this.model = {};
-      } catch (e) {
-        console.log(e)
-      }
+    back() {
+      this.$router.push("/roles")
     }
   }
 }
 </script>
 
 <template>
-  <div class="d-flex align-center pt-8">
-    <v-text-field
-        v-model="model.name"
-        class="mx-8"
-        label="Name"
-        hide-details="auto"
-    ></v-text-field>
-    <v-text-field
-        v-model="model.alias"
-        class="mx-8"
-        label="Alias"
-        hide-details="auto"
-    ></v-text-field>
-    <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
-
-  </div>
+  <v-form ref="form" lazy-validation>
+    <div class="d-flex align-center pt-8">
+      <v-text-field
+          v-model="model.name"
+          class="mx-8"
+          label="Name"
+          hide-details="auto"
+          :rules="[rules.required(), rules.name()]"
+      ></v-text-field>
+      <v-text-field
+          v-model="model.alias"
+          class="mx-8"
+          label="Alias"
+          hide-details="auto"
+          :rules="[rules.required()]"
+      ></v-text-field>
+      <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
+      <v-btn class="mx-8" text @click="back">Cancel</v-btn>
+    </div>
+  </v-form>
 </template>
 
 <style scoped>

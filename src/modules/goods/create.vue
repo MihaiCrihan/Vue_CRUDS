@@ -10,27 +10,12 @@ export default {
     rules
   }),
 
-  mounted() {
-    this.loadData();
-  },
-
   methods: {
-    async loadData() {
-      try {
-        const response = await this.axios.get('http://localhost:3000/goods');
-        this.items = response.data;
-        this.model.id = this.items.length;
-      } catch (e) {
-        console.log(e)
-      }
-    },
-
     async createData() {
       try {
         if ((this.$refs.form).validate()) {
           await this.axios.post('http://localhost:3000/goods', this.model)
           alert("Added successful");
-          await this.loadData();
           this.model = {}
         }
       } catch (e) {
@@ -58,6 +43,7 @@ export default {
           v-model.number="model.price"
           class="mx-8"
           label="Price"
+          type="number"
           :rules="[rules.required()]"
       ></v-text-field>
       <v-text-field

@@ -41,188 +41,14 @@
       "password": "123321",
       "role": 2
     },
-    [
-      {
-        "id": 1,
-        "name": "Ionel",
-        "phone": "0683683",
-        "email": "mihai@mail.ru",
-        "password": "123456789231",
-        "role": 2
-      },
-      {
-        "id": 2,
-        "name": "mihai",
-        "phone": "929292929",
-        "email": "mANSAjlnsjl",
-        "password": "12133",
-        "role": 1
-      },
-      {
-        "id": 3,
-        "name": "aaaa",
-        "phone": "2312312",
-        "email": "miah@mada",
-        "password": "123321",
-        "role": 2
-      }
-    ],
-    [
-      {
-        "id": 1,
-        "name": "Ionel",
-        "phone": "0683683",
-        "email": "mihai@mail.ru",
-        "password": "123456789231",
-        "role": 2
-      },
-      {
-        "id": 2,
-        "name": "mihai",
-        "phone": "929292929",
-        "email": "mANSAjlnsjl",
-        "password": "12133",
-        "role": 1
-      },
-      {
-        "id": 3,
-        "name": "aaaa",
-        "phone": "2312312",
-        "email": "miah@mada",
-        "password": "123321",
-        "role": 2
-      },
-      [
-        {
-          "id": 1,
-          "name": "Ionel",
-          "phone": "0683683",
-          "email": "mihai@mail.ru",
-          "password": "123456789231",
-          "role": 2
-        },
-        {
-          "id": 2,
-          "name": "mihai",
-          "phone": "929292929",
-          "email": "mANSAjlnsjl",
-          "password": "12133",
-          "role": 1
-        },
-        {
-          "id": 3,
-          "name": "aaaa",
-          "phone": "2312312",
-          "email": "miah@mada",
-          "password": "123321",
-          "role": 2
-        }
-      ]
-    ],
-    [
-      {
-        "id": 1,
-        "name": "Ionel",
-        "phone": "0683683",
-        "email": "mihai@mail.ru",
-        "password": "123456789231",
-        "role": 2
-      },
-      {
-        "id": 2,
-        "name": "mihai",
-        "phone": "929292929",
-        "email": "mANSAjlnsjl",
-        "password": "12133",
-        "role": 1
-      },
-      {
-        "id": 3,
-        "name": "aaaa",
-        "phone": "2312312",
-        "email": "miah@mada",
-        "password": "123321",
-        "role": 2
-      },
-      [
-        {
-          "id": 1,
-          "name": "Ionel",
-          "phone": "0683683",
-          "email": "mihai@mail.ru",
-          "password": "123456789231",
-          "role": 2
-        },
-        {
-          "id": 2,
-          "name": "mihai",
-          "phone": "929292929",
-          "email": "mANSAjlnsjl",
-          "password": "12133",
-          "role": 1
-        },
-        {
-          "id": 3,
-          "name": "aaaa",
-          "phone": "2312312",
-          "email": "miah@mada",
-          "password": "123321",
-          "role": 2
-        }
-      ],
-      [
-        {
-          "id": 1,
-          "name": "Ionel",
-          "phone": "0683683",
-          "email": "mihai@mail.ru",
-          "password": "123456789231",
-          "role": 2
-        },
-        {
-          "id": 2,
-          "name": "mihai",
-          "phone": "929292929",
-          "email": "mANSAjlnsjl",
-          "password": "12133",
-          "role": 1
-        },
-        {
-          "id": 3,
-          "name": "aaaa",
-          "phone": "2312312",
-          "email": "miah@mada",
-          "password": "123321",
-          "role": 2
-        },
-        [
-          {
-            "id": 1,
-            "name": "Ionel",
-            "phone": "0683683",
-            "email": "mihai@mail.ru",
-            "password": "123456789231",
-            "role": 2
-          },
-          {
-            "id": 2,
-            "name": "mihai",
-            "phone": "929292929",
-            "email": "mANSAjlnsjl",
-            "password": "12133",
-            "role": 1
-          },
-          {
-            "id": 3,
-            "name": "aaaa",
-            "phone": "2312312",
-            "email": "miah@mada",
-            "password": "123321",
-            "role": 2
-          }
-        ]
-      ]
-    ]
+    {
+      "name": "Mihai",
+      "phone": "068368364",
+      "email": "mihai@mail.ru",
+      "password": "543212",
+      "role": 3,
+      "id": 6
+    }
   ],
   "goods": [
     {
@@ -290,10 +116,17 @@
     },
     {
       "id": 10,
-      "name": "pelimeski",
+      "name": "Pelimeski",
       "price": 111,
       "photo": "https://picsum.photos/id/72/200/300",
       "description": "the best product in the world !!"
+    },
+    {
+      "photo": "https://picsum.photos/id/237/200/300",
+      "description": "https://picsum.photos/id/237/200/300",
+      "price": 42,
+      "name": "Hrisca",
+      "id": 11
     }
   ],
   "orders": [
@@ -339,6 +172,105 @@
         1
       ],
       "totalSum": 1577
+    },
+    {
+      "totalSum": 452,
+      "orderedGoods": [
+        8,
+        5,
+        10,
+        11,
+        7
+      ],
+      "id": 6
+    },
+    {
+      "totalSum": 1342,
+      "orderedGoods": [
+        2
+      ],
+      "id": 7
+    },
+    {
+      "totalSum": 2546,
+      "orderedGoods": [
+        3,
+        4
+      ],
+      "id": 8
+    },
+    {
+      "totalSum": 0,
+      "id": 9
+    },
+    {
+      "orderedGoods": [
+        3
+      ],
+      "totalSum": 223,
+      "id": 10
+    },
+    {
+      "totalSum": 1342,
+      "orderedGoods": [
+        2
+      ],
+      "id": 11
+    },
+    {
+      "orderedGoods": [
+        3,
+        2,
+        4
+      ],
+      "totalSum": 3888,
+      "id": 12
+    },
+    {
+      "totalSum": 0,
+      "id": 13
+    },
+    {
+      "totalSum": 0,
+      "id": 14
+    },
+    {
+      "totalSum": 223,
+      "orderedGoods": [
+        3
+      ],
+      "id": 15
+    },
+    {
+      "totalSum": 1565,
+      "orderedGoods": [
+        2,
+        3
+      ],
+      "id": 16
+    },
+    {
+      "totalSum": 1565,
+      "orderedGoods": [
+        2,
+        3
+      ],
+      "id": 17
+    },
+    {
+      "totalSum": 3665,
+      "orderedGoods": [
+        2,
+        4
+      ],
+      "id": 18
+    },
+    {
+      "totalSum": 1342,
+      "orderedGoods": [
+        2
+      ],
+      "id": 19
     }
   ]
 }

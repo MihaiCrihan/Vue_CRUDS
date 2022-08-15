@@ -18,12 +18,9 @@ export default {
   methods: {
     async loadData() {
       try {
-        const [response, roles] = await Promise.all([
-          this.axios.get('http://localhost:3000/users'),
+        const [ roles ] = await Promise.all([
           this.axios.get('http://localhost:3000/roles')
         ]);
-        this.model = response.data
-        this.model.id = this.items.length
         this.roles = roles.data
       } catch (e) {
         console.log(e)
@@ -33,9 +30,13 @@ export default {
     async createData() {
       try {
         if ((this.$refs.form).validate()) {
-          await this.axios.post('http://localhost:3000/users', this.model);
+          await this.axios.post('http://localhost:3000/users',
+              {
+                ...this.model
+              });
           alert("Added successful");
           await this.loadData();
+          this.model = {}
         }
 
       } catch (e) {
