@@ -49,7 +49,7 @@ export default {
           await this.axios.post('http://localhost:3000/orders', this.model);
           alert("Added successful");
           await this.loadData();
-          this.model = []
+          await this.$router.push('/orders')
         }
       } catch (e) {
         console.log(e)
@@ -65,7 +65,7 @@ export default {
 
 <template>
   <v-form ref="form" lazy-validation>
-    <div class="d-flex align-center pt-8">
+    <div class="d-flex align-center pt-8 px-8">
       <v-select
           v-model="model.orderedGoods"
           :items="goods"
@@ -80,7 +80,7 @@ export default {
           :rules="[rules.select()]"
           @change="calcSum()"
       ></v-select>
-      {{ model.totalSum }}
+      <strong>Sum:&nbsp;</strong> {{ model.totalSum }}&euro;
       <v-btn class="mx-8 success" @click="updateData">Save</v-btn>
       <v-btn class="mr-8" text @click="back">Cancel</v-btn>
     </div>

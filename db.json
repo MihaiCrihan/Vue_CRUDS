@@ -14,6 +14,11 @@
       "id": 3,
       "name": "Guest",
       "alias": "guest"
+    },
+    {
+      "name": "sdsd",
+      "alias": "dsd",
+      "id": 4
     }
   ],
   "users": [
@@ -200,10 +205,6 @@
       "id": 8
     },
     {
-      "totalSum": 0,
-      "id": 9
-    },
-    {
       "orderedGoods": [
         3
       ],
@@ -225,14 +226,6 @@
       ],
       "totalSum": 3888,
       "id": 12
-    },
-    {
-      "totalSum": 0,
-      "id": 13
-    },
-    {
-      "totalSum": 0,
-      "id": 14
     },
     {
       "totalSum": 223,
@@ -271,6 +264,48 @@
         2
       ],
       "id": 19
+    },
+    {
+      "totalSum": 223,
+      "orderedGoods": [
+        3
+      ],
+      "id": 20
+    },
+    {
+      "totalSum": 2323,
+      "orderedGoods": [
+        4
+      ],
+      "id": 21
+    },
+    {
+      "totalSum": 0,
+      "id": 22
+    },
+    {
+      "totalSum": 223,
+      "orderedGoods": [
+        3
+      ],
+      "id": 23
+    },
+    {
+      "totalSum": 2323,
+      "orderedGoods": [
+        4
+      ],
+      "id": 24
+    },
+    {
+      "totalSum": 3909,
+      "orderedGoods": [
+        4,
+        5,
+        7,
+        2
+      ],
+      "id": 25
     }
   ]
 }

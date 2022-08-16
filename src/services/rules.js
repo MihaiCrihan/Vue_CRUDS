@@ -7,7 +7,7 @@ export const nameRule = function () {
 };
 
 export const min = function (number) {
-    return (v) => (!v || v.length >= number || "The value is higher than max");
+    return (v) => (!v || v.length >= number || `The value is higher than ${number}`);
 };
 
 export const email = function () {
